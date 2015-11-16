@@ -1,5 +1,11 @@
 package googlejam;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -49,33 +55,45 @@ public class StoreCredit {
 		return((auxItems[i].index) + " " + (auxItems[j].index));
 	}
 	
+	public static void execute(String inputPath, String outputPath) {
+
+		String[] aux;
+		int N, C, I;
+		StoreItem[] P;
+		
+		try {
+			BufferedReader reader = new BufferedReader(new FileReader(inputPath));
+			PrintWriter writer = new PrintWriter(outputPath, "UTF-8");
+			N = Integer.parseInt(reader.readLine()); // Number of cases
+			
+			for (int cases = 1; cases <= N; cases++) { // for each case
+				
+				C = Integer.parseInt(reader.readLine()); // Credit
+				I = Integer.parseInt(reader.readLine()); // Number of Items in the shop.
+				P = new StoreItem[I];
+				
+				aux = reader.readLine().split(" ");
+				
+				for (int j = 0; j < I; j++ ) {
+					P[j] = new StoreItem(Integer.parseInt(aux[j]), j+1);
+				}
+				
+				writer.println("Case #"+ cases +": " + useCredit(C, P));			
+			}
+			reader.close();
+			writer.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int N, I;
+		execute("input/A-small-practice.in", "output/A-small-practice.out");
+		execute("input/A-large-practice.in", "output/A-large-practice.out");
 		
-		Scanner reader = new Scanner(System.in);  
-		N = reader.nextInt(); // Number of cases
-		
-		int C[] = new int[N];;
-		StoreItem[][] P = new StoreItem[N][];
-		
-		for (int cases = 0; cases < N; cases++) { // for each case
-			
-			C[cases] = reader.nextInt(); // Credit
-			I = reader.nextInt(); // Number of Items in the shop.
-			P[cases] = new StoreItem[I];
-			
-			for (int item = 0; item < I; item++ ) {
-				P[cases][item] = new StoreItem(reader.nextInt(), item+1);
-			}
-					
-		}
-		
-		System.out.println("Case #1: ");
-		
-		for (int cases = 0; cases < N; cases++)	
-			System.out.println("Case #"+ (cases+1) +": " + useCredit(C[cases], P[cases]));	
 	}
 
 }

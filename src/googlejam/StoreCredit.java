@@ -91,8 +91,8 @@ public class StoreCredit {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		execute("input/A-small-practice.in", "output/A-small-practice.out");
-		execute("input/A-large-practice.in", "output/A-large-practice.out");
+		execute("input/StoreCredit-A-small-practice.in", "output/StoreCredit-A-small-practice.out");
+		execute("input/StoreCredit-A-large-practice.in", "output/StoreCredit-A-large-practice.out");
 		
 	}
 
